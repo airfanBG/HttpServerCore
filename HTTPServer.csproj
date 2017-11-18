@@ -8,10 +8,8 @@
   <ItemGroup>
     <Folder Include="Application\Controllers\" />
     <Folder Include="Application\View\" />
-    <Folder Include="Server\Contracts\" />
     <Folder Include="Server\Handlers\Contracts\" />
     <Folder Include="Server\Handlers\Response\" />
-    <Folder Include="Server\Http\Response\" />
     <Folder Include="Server\Routing\Contracts\" />
   </ItemGroup>
 

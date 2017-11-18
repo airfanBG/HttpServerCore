@@ -71,6 +71,10 @@ namespace HTTPServer.Server.Http
 
         private void ParseFormData(string formDataLine)
         {
+            if (this.Method==HttpRequestMethod.Get)
+            {
+                return;
+            }
             ParseQuery(formDataLine,this.QueryParameters);
         }
 
@@ -80,7 +84,10 @@ namespace HTTPServer.Server.Http
             {
                 return;
             }
-            ParseQuery(this.Url, this.UrlParameters);
+            var query = this.Url
+              .Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries).Last();
+
+            ParseQuery(query, this.UrlParameters);
         }
 
         private HttpRequestMethod ParseMethod(string method)
@@ -123,11 +130,9 @@ namespace HTTPServer.Server.Http
                 }
             }
         }
-        private void ParseQuery(string queryString,IDictionary<string,string> dict)
+        private void ParseQuery(string query,IDictionary<string,string> dict)
         {
-            var query = queryString
-               .Split(new[] { '?' }, StringSplitOptions.RemoveEmptyEntries).Last();
-
+           
             if (!query.Contains('='))
             {
                 return;
